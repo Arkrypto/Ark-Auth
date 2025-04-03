@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: Auth-Platform
+  datasource:
+    username: root
+    password: ""
+    url: jdbc:mysql://localhost:3306/auth_platform?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    cache: false
+  data:
+    redis:
+      host: 43.156.105.197
+      port: 6379
+      password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update  # 自动更新数据库结构
+    show-sql: true  # 打印 SQL 查询
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL8Dialect  # MySQL方言
+
+server:
+  port: 8080
+  #ssl:
+    #key-store: classpath:keystore.p12
+    #key-store-password: ""
+    #key-store-type: PKCS12
+    #key-alias: springboot

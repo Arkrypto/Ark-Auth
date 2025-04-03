@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Login</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<link rel="icon" href="/images/leaf.ico" sizes="16x16">
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+		<section id="wrapper">
+			<header>
+				<div class="inner">
+					<h2>Bears Auth Platform | Login</h2>
+					<p>sad 123456</p>
+				</div>
+			</header>
+
+		<!-- Content -->
+			<div class="wrapper">
+				<div class="inner">
+					<form th:action="@{/customLogin}" method="post">
+						<div class="row gtr-uniform">
+							<div class="col-6 col-12-xsmall">
+								<label>Username</label>
+								<input type="text" name="username" value="" />
+							</div>
+							<div class="col-6 col-12-xsmall">
+								<label>Password</label>
+								<input type="password" name="password" value="" />
+							</div>
+							<div class="col-12">
+								<ul class="actions">
+									<li><input type="submit" value="登录" class="primary" /></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<!-- Scripts -->
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.scrollex.min.js"></script>
+		<script src="/assets/js/browser.min.js"></script>
+		<script src="/assets/js/breakpoints.min.js"></script>
+		<script src="/assets/js/util.js"></script>
+		<script src="/assets/js/main.js"></script>
+	</body>
+</html>
