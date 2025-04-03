@@ -1,4 +1,4 @@
-package cia.northboat.auth.sim;
+package cia.northboat.auth.crypto;
 
 import cia.northboat.auth.pojo.Key;
 import cia.northboat.auth.pojo.Pair;

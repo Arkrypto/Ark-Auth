@@ -2,11 +2,10 @@ package cia.northboat.auth.service;
 
 
 import cia.northboat.auth.pojo.Pair;
-import cia.northboat.auth.sim.Schnorr;
+import cia.northboat.auth.crypto.Schnorr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
