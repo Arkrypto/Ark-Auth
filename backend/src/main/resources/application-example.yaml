@@ -3,14 +3,14 @@ spring:
     name: Auth-Platform
   datasource:
     username: root
-    password: "roohees8Pohng5meechi7ufaiwiez2sh"
-    url: jdbc:mysql://43.156.105.197:3306/auth_platform?useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    password: ""
+    url: jdbc:mysql://localhost:3306/auth_platform?useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
   thymeleaf:
     cache: false
   data:
     redis:
-      host: 43.156.105.197
+      host: localhost
       port: 6379
       password: ""
   jpa:
