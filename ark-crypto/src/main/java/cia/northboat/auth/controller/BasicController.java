@@ -47,11 +47,6 @@ public class BasicController {
         return "login";
     }
 
-    @GetMapping("/elements")
-    public String elements() {
-        return "elements";  // 返回 templates/login.html 页面
-    }
-
 
     @GetMapping("/toAuth")
     public String toAuth() {

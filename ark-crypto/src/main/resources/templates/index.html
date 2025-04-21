@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Bear's Auth Platform</title>
+		<title>Ark Auth</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/assets/css/main.css" />
@@ -21,7 +21,7 @@
 				<div class="myNav"></div>
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1><a href="/">Bear's Auth Platform</a></h1>
+						<h1><a href="/">Ark Auth</a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -32,10 +32,10 @@
 						<div class="inner">
 							<h2>Menu</h2>
 							<ul class="links">
-								<li><a th:href="@{/home}">Home</a></li>
-								<li><a th:href="@{/toAuth}">Auth</a></li>
-								<li><a th:href="@{/logout}">Logout</a></li>
-								<li><a href="https://github.com/northboat" target="_blank">More</a></li>
+								<li><a href="/home">Home</a></li>
+								<li><a href="/toAuth">Auth</a></li>
+								<li><a href="#">Profile</a></li>
+								<li><a href="/logout">Logout</a></li>
 							</ul>
 							<a href="#" class="close">Close</a>
 						</div>
@@ -45,9 +45,9 @@
 					<section id="banner">
 						<div class="inner">
 							<div class="logo"><span class="icon fa-gem"></span></div>
-							<h2>Bear's Auth Platform</h2>
-							<p>一个身份认证仿真平台，template from <a th:href="@{/elements}">HTML5 UP</a></p>
-							<a target="_blank" href="https://northboat.github.io/pages/1e89ae/" class="button">认证综述</a>
+							<h2>Ark Auth</h2>
+							<p>一个身份认证仿真平台，template by <a href="https://html5up.net/">HTML5 UP</a></p>
+							<a target="_blank" href="https://arkrypto.github.io/pages/1e89ae/" class="button">认证综述</a>
 						</div>
 					</section>
 
@@ -59,29 +59,37 @@
 							<div class="inner">
 								<h2 class="major">传统公钥加密</h2>
 								<p>
-									椭圆曲线密码学（ECC）是一种的公钥密码学，其计算基于在有限域上的椭圆曲线的代数结构。与基于 Galois 字段中的模幂的密码系统（例如 RSA 密码系统和 ElGamal 密码系统）相比，ECC 在更小的密钥上提供同等的安全性。
-									椭圆曲线适用于密钥一致性、数字签名、伪随机生成器和其他任务。间接地，它们可以通过具体的方案与密钥协议、对称加密相结合。它们还用于几种整数分解算法在密码学中的应用，例如 Lenstra 椭圆曲线分解。
+									公钥加密是一种非对称加密机制，使用公开密钥加密、私有密钥解密，常用于身份认证、加密通信和数字签名等安全场景
+									传统的公钥密码系统有 RSA、Elgamal、Rabin、Shamir、DH 等
 								</p>
 								<section class="features">
 									<article>
-										<a href="#" class="image"><img src="/images/pic04.jpg" alt="" /></a>
 										<h3 class="major">
-											An ECDLP-Based Randomized Key RFID Authentication Protocol
+											RSA - 在大整数域上实现
 										</h3>
-										<p>
-											Keywords: RFID security、privacy、tracking attack、ECDLP
-										</p>
-										<a target="_blank" href="/paper/An_ECDLP-Based_Randomized_Key_RFID_Authentication_Protocol.pdf"  class="special">View the Paper</a>
-									</article>
-									<article>
-										<a href="#" class="image"><img src="/images/pic05.jpg" alt="" /></a>
-										<h3 class="major">A secure ECC-based RFID authentication scheme integrated with ID-verifier transfer protocol</h3>
-										<p>
-											Keywords: Internet-of-Things (IoT)、RFID Public-key cryptographic (PKC)、Elliptic curve cryptosystem (ECC)、ID-verifier
-										</p>
-										<a target="_blank" href="/paper/A_secure_ECC-based_RFID_authentication_scheme_integrated_with_ID-verifier_transfer_protocol.pdf" class="special">View the Paper</a>
+										<a href="#" class="special">View the Details</a>
 									</article>
 
+									<article>
+										<h3 class="major">
+											Elgamal - 在椭圆曲线上实现
+										</h3>
+										<a href="#" class="special">View the Details</a>
+									</article>
+
+									<article>
+										<h3 class="major">
+											DH 密钥协商 - 在椭圆曲线上实现
+										</h3>
+										<a href="#" class="special">View the Details</a>
+									</article>
+
+									<article>
+										<h3 class="major">
+											Rabin - 在大整数域上实现
+										</h3>
+										<a href="#" class="special">View the Details</a>
+									</article>
 
 								</section>
 							</div>
@@ -178,36 +186,22 @@
 				<!-- Footer -->
 					<section id="footer">
 						<div class="inner">
-							<h2 class="major">A Little Game: Be a σ Man</h2>
-							<p>输入名字和PIN码，若名字不存在，将自动创建用户并列入排名，若存在并且PIN码正确，将更新当前时间并记录最长时间，请记住第一次录入的PIN码，该排名按当前最长时间排序</p>
+							<h2 class="major">Being a σ Man</h2>
+							<p>用户注册</p>
 							<p th:if="${msg != null and msg != ''}" th:text="${msg}"></p>
-							<div class="table-wrapper">
-								<table>
-									<thead>
-									<tr>
-										<th>Name</th>
-										<th>Last Time</th>
-										<th>Longest</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr th:each="friend: ${friends}">
-										<td th:text="${friend.getName()}"></td>
-										<td th:text="${friend.getLastTime()}"></td>
-										<td th:text="${friend.getLongest()}"></td>
-									</tr>
-									</tbody>
-								</table>
-							</div>
 							<form method="post" th:action="@{/record}">
 								<div class="row gtr-uniform">
-									<div class="col-6 col-12-xsmall">
+									<div class="col-4 col-12-xsmall">
 										<label for="name">Name</label>
 										<input type="text" name="name" id="name" />
 									</div>
-									<div class="col-6 col-12-xsmall">
-										<label for="pin">PIN</label>
-										<input type="password" name="pin" id="pin" />
+									<div class="col-4 col-12-xsmall">
+										<label for="pwd">Password</label>
+										<input type="password" name="pwd" id="pwd" />
+									</div>
+									<div class="col-4 col-12-xsmall">
+										<label for="repwd">Confirm Pwd</label>
+										<input type="password" name="repwd" id="repwd" />
 									</div>
 								</div><br>
 								<ul class="actions">
@@ -216,7 +210,7 @@
 							</form>
 
 							<ul class="copyright">
-								<li>&copy; cia.northboat. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+								<li>&copy; cia.Arkrypto. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 							</ul>
 						</div>
 					</section>
