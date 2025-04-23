@@ -69,6 +69,7 @@ jpbc 导出需要配置 maven
 除此以外，Maven 打包将默认不包含`<scope>`为 system 的包，所以还要额外在 build 插件中配置
 
 ```xml
+
 <build>
     <plugins>
         <plugin>
@@ -76,7 +77,7 @@ jpbc 导出需要配置 maven
             <artifactId>spring-boot-maven-plugin</artifactId>
             <version>${spring-boot.version}</version>
             <configuration>
-                <mainClass>cia.northboat.auth.AuthApplication</mainClass>
+                <mainClass>cia.arkrypto.auth.AuthApplication</mainClass>
                 <skip>false</skip>
                 <includeSystemScope>true</includeSystemScope>
             </configuration>

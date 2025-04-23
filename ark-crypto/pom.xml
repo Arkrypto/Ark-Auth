@@ -90,7 +90,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>cia.northboat.auth.AuthApplication</mainClass>
+                    <mainClass>cia.arkrypto.auth.AuthApplication</mainClass>
                     <skip>false</skip>
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
