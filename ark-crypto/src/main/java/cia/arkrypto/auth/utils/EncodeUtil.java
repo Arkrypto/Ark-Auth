@@ -17,7 +17,7 @@ public class EncodeUtil {
         for(int i = 0; i < 9; i++){
 
             String randomStr = Integer.toBinaryString(num);
-            String randomStrWithPadding = String.format("%5s", randomStr).replaceAll(" ", "0");
+            String randomStrWithPadding = String.format("%7s", randomStr).replaceAll(" ", "0");
             Map<String, Object> encResult0 = enc0(randomStrWithPadding);
             Map<String, Object> encResult1 = enc1(randomStrWithPadding);
 
@@ -33,6 +33,15 @@ public class EncodeUtil {
     }
 
 
+    public static StringBuilder subComma(StringBuilder str){
+        if (!str.isEmpty() && ',' == str.charAt(str.length() - 1)){
+            return new StringBuilder(str.substring(0, str.length() - 1));
+        }
+        return str;
+    }
+
+
+
     public static Map<String, Object> enc0(String num) {
         long s = System.nanoTime();
         StringBuilder result = new StringBuilder();
@@ -44,9 +53,7 @@ public class EncodeUtil {
                 result.append(",");
             }
         }
-        if (!result.isEmpty() && ',' == result.charAt(result.length() - 1)){
-            result = new StringBuilder(result.substring(0, result.length() - 1));
-        }
+        result = subComma(result);
         long e = System.nanoTime();
 
         return Map.of("result", result.toString(), "time", e-s);
@@ -66,6 +73,7 @@ public class EncodeUtil {
                 }
             }
         }
+        result = subComma(result);
         long e = System.nanoTime();
 
         return Map.of("result", result.toString(), "time", e-s);

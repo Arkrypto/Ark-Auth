@@ -77,7 +77,7 @@ jpbc 导出需要配置 maven
             <artifactId>spring-boot-maven-plugin</artifactId>
             <version>${spring-boot.version}</version>
             <configuration>
-                <mainClass>cia.arkrypto.auth.AuthApplication</mainClass>
+                <mainClass>cia.arkrypto.auth.ArkAuthCryptocia.arkrypto.auth.ArkAuthCrypto</mainClass>
                 <skip>false</skip>
                 <includeSystemScope>true</includeSystemScope>
             </configuration>

@@ -7,15 +7,6 @@ public enum ResultCode {
     INTERNAL_SERVER_ERROR(500, "服务器错误"),
     REQUEST_TIME_OUT(408, "请求超时"),
 
-    //判题反馈
-    //JUDGE_PASS(1, "通过"),
-    JUDGE_COMPILE_FAILURE(2, "编译失败"),
-    JUDGE_TIMEOUT_FAILURE(3, "执行超时"),
-    JUDGE_MEMORY_OUT_FAILURE(4, "内存超出"),
-    JUDGE_NOT_MATCH_FAILURE(5, "解答错误"),
-    JUDGE_SERVER_ERROR(6, "服务错误"),
-    JUDGE_IO_ERROR(7, "写入用户代码错误"),
-    JUDGE_RUNTIME_EXCEPTION(8, "运行时异常"),
 
     //参数问题
     PARAM_IS_INVALID(1001, "参数无效"),

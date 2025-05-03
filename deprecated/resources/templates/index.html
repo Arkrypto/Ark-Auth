@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Ark Auth</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+		<link rel="icon" href="/images/leaf.ico" sizes="16x16">
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+				<div class="myNav"></div>
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1><a href="/">Ark Auth</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="/home">Home</a></li>
+								<li><a href="/toAuth">Auth</a></li>
+								<li><a href="#">Profile</a></li>
+								<li><a href="/logout">Logout</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+							<div class="logo"><span class="icon fa-gem"></span></div>
+							<h2>Ark Auth</h2>
+							<p>一个身份认证仿真平台，template by <a href="https://html5up.net/">HTML5 UP</a></p>
+							<a target="_blank" href="https://arkrypto.github.io/pages/1e89ae/" class="button">认证综述</a>
+						</div>
+					</section>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+
+<!--						传统公钥加密 -->
+						<section id="zero" class="wrapper alt style1">
+							<div class="inner">
+								<h2 class="major">传统公钥加密</h2>
+								<p>
+									公钥加密是一种非对称加密机制，使用公开密钥加密、私有密钥解密，常用于身份认证、加密通信和数字签名等安全场景
+									传统的公钥密码系统有 RSA、Elgamal、Rabin、Shamir、DH 等
+								</p>
+								<section class="features">
+									<article>
+										<h3 class="major">
+											RSA - 在大整数域上实现
+										</h3>
+										<a href="#" class="special">View the Details</a>
+									</article>
+
+									<article>
+										<h3 class="major">
+											Elgamal - 在椭圆曲线上实现
+										</h3>
+										<a href="#" class="special">View the Details</a>
+									</article>
+
+									<article>
+										<h3 class="major">
+											DH 密钥协商 - 在椭圆曲线上实现
+										</h3>
+										<a href="#" class="special">View the Details</a>
+									</article>
+
+									<article>
+										<h3 class="major">
+											Rabin - 在大整数域上实现
+										</h3>
+										<a href="#" class="special">View the Details</a>
+									</article>
+
+								</section>
+							</div>
+						</section>
+
+						<!-- One -->
+							<section id="one" class="wrapper spotlight style1">
+								<div class="inner">
+									<a th:href="@{/toAuth/Schnorr}" class="image">
+										<img src="/images/pic01.jpg" alt="" />
+									</a>
+									<div class="content">
+										<h2 class="major">RFID-tags for anti-counterfeiting</h2>
+										<p>
+											P. Tuyls, L. Batina, RFID-tags for anti-counterfeiting, Lect. Notes Comput. Sci. 3860 (2006) 115–131.
+											C. Schnorr 发布的基于 ECC 变体的认证协议，一个单密钥轮的 ECC 认证方案
+										</p>
+										<a href="/paper/RFID-Tags_for_anti-counterfeiting.pdf" class="special" target="_blank">View the Paper</a>
+									</div>
+								</div>
+							</section>
+
+						<!-- Two -->
+							<section id="two" class="wrapper alt spotlight style2">
+								<div class="inner">
+									<a href="#" class="image">
+										<img src="/images/pic02.jpg" alt="" />
+									</a>
+									<div class="content">
+										<h2 class="major">Public-key cryptography for RFID tags</h2>
+										<p>
+											L. Batina, J. Guajardo, T. Kerins, N. Mentens, P. Tuyls, I. Verbauwhede, Public-key cryptography for RFID-tags, in: Fifth IEEE International Conference on Pervasive Computing and Communications Workshops, 2007, pp. 217–222.
+											Okamoto 发布的基于 ECC 变体的认证协议，以避免主动攻击，采用双密钥结构
+										</p>
+										<a href="/paper/public-key-cryptography-for-rfid-tags.pdf" class="special" target="_blank">View the Paper</a>
+									</div>
+								</div>
+							</section>
+
+						<!-- Three -->
+							<section id="three" class="wrapper spotlight style3">
+								<div class="inner">
+									<a href="#" class="image">
+										<img src="/images/pic03.jpg" alt="" />
+									</a>
+									<div class="content">
+										<h2 class="major">EC-RAC (ECDLP Based Randomized Access Control): Provably Secure RFID Authentication Protocol</h2>
+										<p>
+											Y.K. Lee, L. Batina, I. Verbauwhede, EC-RAC (ECDLP Based Randomized Access Control): Provably Secure RFID Authentication Protocol, IEEE International Conference on RFID, 2008, pp. 97–104.
+											为了解决 RFID 系统的要求，Lee 等人设计了一种基于 ECDLP 的新型 RFID 协议
+										</p>
+										<a target="_blank" href="/paper/EC-RAC(ECDLP_Based_Randomized_Access_Control)_Provably_Secure_RFID_authentication_protocol.pdf" class="special">View the Paper</a>
+									</div>
+								</div>
+							</section>
+
+						<!-- Four -->
+							<section id="four" class="wrapper alt style1">
+								<div class="inner">
+									<h2 class="major">Elliptic Curve Cryptography (ECC)</h2>
+									<p>
+										椭圆曲线密码学（ECC）是一种的公钥密码学，其计算基于在有限域上的椭圆曲线的代数结构。与基于 Galois 字段中的模幂的密码系统（例如 RSA 密码系统和 ElGamal 密码系统）相比，ECC 在更小的密钥上提供同等的安全性。
+										椭圆曲线适用于密钥一致性、数字签名、伪随机生成器和其他任务。间接地，它们可以通过具体的方案与密钥协议、对称加密相结合。它们还用于几种整数分解算法在密码学中的应用，例如 Lenstra 椭圆曲线分解。
+									</p>
+									<section class="features">
+										<article>
+											<a href="#" class="image"><img src="/images/pic04.jpg" alt="" /></a>
+											<h3 class="major">
+												An ECDLP-Based Randomized Key RFID Authentication Protocol
+											</h3>
+											<p>
+												Keywords: RFID security、privacy、tracking attack、ECDLP
+											</p>
+											<a target="_blank" href="/paper/An_ECDLP-Based_Randomized_Key_RFID_Authentication_Protocol.pdf"  class="special">View the Paper</a>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="/images/pic05.jpg" alt="" /></a>
+											<h3 class="major">A secure ECC-based RFID authentication scheme integrated with ID-verifier transfer protocol</h3>
+											<p>
+												Keywords: Internet-of-Things (IoT)、RFID Public-key cryptographic (PKC)、Elliptic curve cryptosystem (ECC)、ID-verifier
+											</p>
+											<a target="_blank" href="/paper/A_secure_ECC-based_RFID_authentication_scheme_integrated_with_ID-verifier_transfer_protocol.pdf" class="special">View the Paper</a>
+										</article>
+
+
+									</section>
+									<ul class="actions">
+										<li><a th:href="@{/auth}" class="button">Browse All</a></li>
+									</ul>
+								</div>
+							</section>
+
+					</section>
+				<!-- Footer -->
+					<section id="footer">
+						<div class="inner">
+							<h2 class="major">Being a σ Man</h2>
+							<p>用户注册</p>
+							<p th:if="${msg != null and msg != ''}" th:text="${msg}"></p>
+							<form method="post" th:action="@{/record}">
+								<div class="row gtr-uniform">
+									<div class="col-4 col-12-xsmall">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="col-4 col-12-xsmall">
+										<label for="pwd">Password</label>
+										<input type="password" name="pwd" id="pwd" />
+									</div>
+									<div class="col-4 col-12-xsmall">
+										<label for="repwd">Confirm Pwd</label>
+										<input type="password" name="repwd" id="repwd" />
+									</div>
+								</div><br>
+								<ul class="actions">
+									<li><input type="submit" value="搭个∠先" /></li>
+								</ul>
+							</form>
+
+							<ul class="copyright">
+								<li>&copy; cia.Arkrypto. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+
+	</body>
+</html>

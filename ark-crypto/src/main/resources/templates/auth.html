@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Auth</title>
+		<title>Ark Auth | Test</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/assets/css/main.css" />
@@ -32,7 +32,6 @@
 				<ul class="links">
 					<li><a href="/">Home</a></li>
 					<li><a href="/toAuth">Auth</a></li>
-					<li><a href="#">Profile</a></li>
 					<li><a href="/logout">Logout</a></li>
 				</ul>
 				<a href="#" class="close">Close</a>
@@ -43,7 +42,7 @@
 		<section id="wrapper">
 			<header>
 				<div class="inner">
-					<h2>Ark Auth | Authentication</h2>
+					<h2>Ark Auth | Test</h2>
 					<p>Test and Simulate the Classic Authentication Protocol</p>
 				</div>
 			</header>
@@ -52,37 +51,41 @@
 			<div class="wrapper">
 				<div class="inner">
 					<section>
-						<h3 class="major">仿真</h3>
+						<h3 class="major">认证</h3>
 						<p>
 							我喜欢在丛林里面抢肉吃，因为我是来自真正的底层，当我站在两江交汇之处，我身上流的是劳动人民的血，<b>我太帅咯，</b>爱噶的瑞，<strong>下游戏，</strong>直接就钻进了VIP，<i>我太狂咯，</i>爱噶的哩，<em>看哈你，</em>下苦力只为了买个衣，<sup>我太帅咯，</sup>爱噶的瑞，<sub>下游戏，</sub>直接就钻进了VIP，我太狂咯，<u>爱噶的哩，</u>看哈你，<code>下苦力只为了买个衣</code>
 						</p>
-						<h4>认证步骤</h4>
-						<div style="text-align: center;">
-							<code th:if="${msg != null and msg != ''}" th:text="${msg}"></code>
-							<img th:if="${image != null and image != ''}" style="max-width: 100%; height: auto" th:src="${image}" alt="协议步骤">
-						</div><br>
 
-						<h4>会话</h4>
-
-						<pre><code><p th:text="${detail}" style="margin-bottom: 4px"></p></code></pre><br>
-
-						<h4>协议</h4>
-						<form method="post" th:action="@{/auth}">
+						<h3>协议</h3>
+						<form method="get" th:action="@{/test}">
 							<div class="col-12">
 								<select name="algo" id="demo-category" th:value="${algo}">
 									<option value="" th:selected="${algo == null or algo == ''}">请选择</option>
+									<option value="RSA" th:selected="${algo == 'RSA'}">RSA Protocol</option>
+									<option value="ElGamal" th:selected="${algo == 'ElGamal'}">ElGamal Protocol on ECC</option>
+									<option value="DH" th:selected="${algo == 'DH'}">DH Protocol on ECC</option>
+									<option value="Rabin" th:selected="${algo == 'Rabin'}">Rabin Protocol</option>
 									<option value="Schnorr" th:selected="${algo == 'Schnorr'}">Schnorr Protocol</option>
 									<option value="Okamoto" th:selected="${algo == 'Okamoto'}">Okamote Protocol</option>
 									<option value="EC-RAC" th:selected="${algo == 'EC-RAC'}">EC-RAC Protocol</option>
 									<option value="ECDLP-RK" th:selected="${algo == 'ECDLP-RK'}">ECDLP-RK Protocol</option>
+									<option value="ECC-ID-Verifier" th:selected="${algo == 'ECC-ID-Verifier'}">ECC-ID-Verifier</option>
 								</select>
 							</div><br>
 							<div class="col-12">
 								<ul class="actions">
-									<li><input type="submit" value="Authenticate" class="primary" /></li>
+									<li><input type="submit" value="TEST" class="primary" /></li>
 								</ul>
 							</div>
 						</form>
+
+
+						<h3>测试结果</h3>
+
+						<div th:each="entry : ${result}">
+							<strong th:text="${entry.key}">Key</strong>:<br>
+							<p th:text="${entry.value}" style="word-wrap: break-word; word-break: break-all; white-space: normal;">Value</p>
+						</div><br>
 					</section>
 
 				</div>
