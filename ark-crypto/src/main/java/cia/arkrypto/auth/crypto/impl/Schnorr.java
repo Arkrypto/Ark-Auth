@@ -11,8 +11,8 @@ import it.unisa.dia.gas.jpbc.Pairing;
 public class Schnorr extends CipherSystem {
 
 
-    public Schnorr(Pairing BP, Field G1, Field G2, Field GT, Field Zr, Boolean sanitizable, Boolean updatable) {
-        super(BP, G1, G2, GT, Zr, sanitizable, updatable);
+    public Schnorr(Pairing BP, Field G1, Field Zr, Boolean sanitizable, Boolean updatable) {
+        super(BP, G1, null, null, Zr, sanitizable, updatable);
     }
 
 
@@ -42,7 +42,7 @@ public class Schnorr extends CipherSystem {
 
         Element r = randomZ();
         Element R = g.mulZn(r).getImmutable();
-        Element c = HashUtil.hashStr2Zr(getZr(), message, R.toString());
+        Element c = HashUtil.hashStr2Group(getZr(), message, R.toString());
         Element z = r.add(x.mulZn(c)).getImmutable();
 
 
@@ -65,6 +65,6 @@ public class Schnorr extends CipherSystem {
         Element R1 = g.mulZn(z).sub(y.mulZn(c)).getImmutable();
 
 
-        return c.isEqual(HashUtil.hashStr2Zr(getZr(), message, R1.toString()));
+        return c.isEqual(HashUtil.hashStr2Group(getZr(), message, R1.toString()));
     }
 }

@@ -30,14 +30,14 @@ public class HashUtil {
 
 
 
-    public static Element hashStr2Zr(Field Zr, String ... strings){
+    public static Element hashStr2Group(Field group, String ... strings){
         int n = strings.length;
         byte[][] bytes = new byte[n][];
         for(int i = 0; i < n; i++){
             bytes[i] = strings[i].getBytes();
         }
         byte[] input = concat(bytes);
-        return hashByte2Zr(Zr, input);
+        return hashByte2Zr(group, input);
     }
 
 }

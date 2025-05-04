@@ -46,7 +46,7 @@ public class RSA extends CipherSystem {
     @Override
     public CryptoMap sign(String message, CryptoMap sk){
         // 明文哈希
-        BigInteger m = HashUtil.hashStr2Zr(getZr(), message).toBigInteger();
+        BigInteger m = HashUtil.hashStr2Group(getZr(), message).toBigInteger();
         BigInteger d = sk.getBigInteger("d");
         BigInteger n = sk.getBigInteger("n");
         BigInteger s = m.modPow(d, n);
@@ -66,7 +66,7 @@ public class RSA extends CipherSystem {
         BigInteger n = pk.getBigInteger("n");
 
         BigInteger recovered = s.modPow(e, n);
-        BigInteger m = HashUtil.hashStr2Zr(getZr(), message).toBigInteger();
+        BigInteger m = HashUtil.hashStr2Group(getZr(), message).toBigInteger();
         return m.equals(recovered);
     }
 
