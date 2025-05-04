@@ -59,7 +59,7 @@
 								<h2 class="major">传统公钥加密</h2>
 								<p>
 									公钥加密是一种非对称加密机制，使用公开密钥加密、私有密钥解密，常用于身份认证、加密通信和数字签名等安全场景
-									传统的公钥密码系统有 RSA、Elgamal、Rabin、Shamir、DH 等
+									传统的公钥密码系统有 RSA、Elgamal、Schnorr、DH、Rabin、Shamir 等
 								</p>
 								<section class="features">
 									<article>
@@ -71,23 +71,23 @@
 
 									<article>
 										<h3 class="major">
-											ElGamal - 在椭圆曲线上实现
+											ElGamal - 在 ECC 上实现
 										</h3>
 										<a href="/toAuth/ElGamal" class="special">View the Details</a>
 									</article>
 
 									<article>
 										<h3 class="major">
-											DH 密钥协商 - 在椭圆曲线上实现
+											DH 密钥协商 - 在 ECC 上实现
 										</h3>
 										<a href="/toAuth/DH" class="special">View the Details</a>
 									</article>
 
 									<article>
 										<h3 class="major">
-											Rabin - 在大整数域上实现
+											Schnorr - 在 ECC 上实现
 										</h3>
-										<a href="/toAuth/Rabin" class="special">View the Details</a>
+										<a href="/toAuth/Schnorr" class="special">View the Details</a>
 									</article>
 
 								</section>
@@ -99,54 +99,56 @@
 								<div class="inner">
 
 									<div class="content">
-										<h2 class="major">RFID-tags for anti-counterfeiting</h2>
+										<h2 class="major">Privacy-Aware Secure Region-Based Handover for  Small Cell Networks in 5G-Enabled  Mobile Communication</h2>
 										<p>
-											P. Tuyls, L. Batina, RFID-tags for anti-counterfeiting, Lect. Notes Comput. Sci. 3860 (2006) 115–131.
-											C.<br>
-											Schnorr 发布的基于 ECC 变体的认证协议，一个单密钥轮的 ECC 认证方案
+											可擦除签名方案，利用可擦除签名，在不同基站间进行快速切换，考虑构建一个群组认证方案，实现快速的权限转交
 										</p>
-										<a href="/toAuth/Schnorr" class="special">View the Details</a>
+										<a href="#" class="special">View the Details</a>
 									</div>
 								</div>
 							</section>
 
-						<!-- Two -->
-							<section id="two" class="wrapper alt spotlight style2">
-								<div class="inner">
-									<div class="content">
-										<h2 class="major">Public-key cryptography for RFID tags</h2>
-										<p>
-											L. Batina, J. Guajardo, T. Kerins, N. Mentens, P. Tuyls, I. Verbauwhede, Public-key cryptography for RFID-tags, in: Fifth IEEE International Conference on Pervasive Computing and Communications Workshops, 2007, pp. 217–222.<br>
-											Okamoto 发布的基于 ECC 变体的认证协议，以避免主动攻击，采用双密钥结构
-										</p>
-										<a href="/toAuth/Okamoto" class="special">View the Details</a>
-									</div>
-								</div>
-							</section>
-
-						<!-- Three -->
-							<section id="three" class="wrapper spotlight style3">
-								<div class="inner">
-									<div class="content">
-										<h2 class="major">EC-RAC (ECDLP Based Randomized Access Control): Provably Secure RFID Authentication Protocol</h2>
-										<p>
-											Y.K. Lee, L. Batina, I. Verbauwhede, EC-RAC (ECDLP Based Randomized Access Control): Provably Secure RFID Authentication Protocol, IEEE International Conference on RFID, 2008, pp. 97–104.<br>
-											为了解决 RFID 系统的要求，Lee 等人设计了一种基于 ECDLP 随机密钥（RK）的新型 RFID 协议
-										</p>
-										<a href="/toAuth/EC-RAC" class="special">View the Details</a>
-									</div>
-								</div>
-							</section>
 
 						<!-- Four -->
 							<section id="four" class="wrapper alt style1">
 								<div class="inner">
-									<h2 class="major">Elliptic Curve Cryptography (ECC)</h2>
+									<h2 class="major">RFID Auth</h2>
 									<p>
-										椭圆曲线密码学（ECC）是一种的公钥密码学，其计算基于在有限域上的椭圆曲线的代数结构。与基于 Galois 字段中的模幂的密码系统（例如 RSA 密码系统和 ElGamal 密码系统）相比，ECC 在更小的密钥上提供同等的安全性。
-										椭圆曲线适用于密钥一致性、数字签名、伪随机生成器和其他任务。间接地，它们可以通过具体的方案与密钥协议、对称加密相结合。它们还用于几种整数分解算法在密码学中的应用，例如 Lenstra 椭圆曲线分解。
+										RFID 认证协议是一类专为资源受限的射频识别设备设计的轻量级安全协议，用于在读写器与标签之间实现身份验证和数据保护，根据认证协议的复杂度，通常将 RFID 认证协议分为：超轻量、轻量、中量和重量。
+										其中，超轻量多采用位运算、轻量采用随机数生成器和冗余码校验、中量采用简单的哈希、重量采用较为轻量的公钥体系如 ECC
 									</p>
 									<section class="features">
+
+										<article>
+											<h3 class="major">
+												RFID-tags for anti-counterfeiting
+											</h3>
+											<p>
+												Tuyls 发布的基于 ECC 上的 Schnorr 协议的变体，一个单密钥轮的 ECC 认证方案
+											</p>
+											<a href="/toAuth/SchnorrRFID" class="special">View the Details</a>
+										</article>
+
+										<article>
+											<h3 class="major">
+												Public-keyPair cryptography for RFID tags
+											</h3>
+											<p>
+												Batina 发布的基于 ECC 上的 Okamoto 协议的变体，采用双密钥结构，能够避免主动攻击
+											</p>
+											<a href="/toAuth/OkamotoRFID" class="special">View the Details</a>
+										</article>
+
+										<article>
+											<h3 class="major">
+												EC-RAC (ECDLP Based Randomized Access Control): Provably Secure RFID Authentication Protocol
+											</h3>
+											<p>
+												为了解决 RFID 系统的要求，Lee 等人设计了一种基于 ECDLP 随机密钥（RK）的新型 RFID 协议
+											</p>
+											<a href="/toAuth/EC-RAC" class="special">View the Details</a>
+										</article>
+
 										<article>
 											<h3 class="major">
 												An ECDLP-Based Randomized Key RFID Authentication Protocol
@@ -160,10 +162,9 @@
 										<article>
 											<h3 class="major">A secure ECC-based RFID authentication scheme integrated with ID-verifier transfer protocol</h3>
 											<p>
-												众所周知，基于椭圆曲线密码系统（ECC）的算法将是 PKC 算法的最佳选择，因为它们的密钥大小小且计算效率高。在本文中，我们提出了一种基于 ECC 的安全 RFID 身份验证方案，该方案与 ID-verifier 传输协议集成，
-												并可以实现双向认证
+												基于椭圆曲线密码系统（ECC）的算法将是 PKC 算法的最佳选择，因为它们的密钥大小小且计算效率高。在本文中，我们提出了一种基于 ECC 的安全 RFID 身份验证方案，该方案与 ID-verifier 传输协议集成，并实现双向认证
 											</p>
-											<a href="/toAuth/ECC-ID-Verifier" class="special">View the Details</a>
+											<a href="/toAuth/ECC-ID" class="special">View the Details</a>
 										</article>
 
 

@@ -169,10 +169,10 @@ keytool -genkeypair -alias springboot -keyalg RSA -keysize 2048 \
 server:
   port: 8443
   ssl:
-    key-store: classpath:keystore.p12
-    key-store-password: "123456"
-    key-store-type: PKCS12
-    key-alias: springboot
+    keyPair-store: classpath:keystore.p12
+    keyPair-store-password: "123456"
+    keyPair-store-type: PKCS12
+    keyPair-alias: springboot
 ```
 
 打包上传部署，通过`ip:8443`进行访问，成功，经测试 GitHub Page 同样允许自编译的 SSL 证书

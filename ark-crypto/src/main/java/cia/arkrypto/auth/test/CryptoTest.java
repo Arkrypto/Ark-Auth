@@ -3,8 +3,9 @@ package cia.arkrypto.auth.test;
 import cia.arkrypto.auth.crypto.CipherSystem;
 import cia.arkrypto.auth.crypto.impl.RSA;
 import cia.arkrypto.auth.crypto.impl.Schnorr;
-import cia.arkrypto.auth.dto.Key;
-import cia.arkrypto.auth.dto.Signature;
+import cia.arkrypto.auth.crypto.impl.SchnorrRFID;
+import cia.arkrypto.auth.dto.CryptoMap;
+import cia.arkrypto.auth.dto.KeyPair;
 import it.unisa.dia.gas.jpbc.Field;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
@@ -20,17 +21,14 @@ public class CryptoTest {
 
     public static void main(String[] args) {
 
-        CipherSystem schnorr = new Schnorr(BP, G1, G2, GT, Zr, false, false, 10);
-        CipherSystem rsa = new RSA(false, false);
+        CipherSystem schnorrRFID = new SchnorrRFID(BP, G1, G2, GT, Zr, false, false, 10);
+        CipherSystem rsa = new RSA(Zr, false, false);
+        CipherSystem schnorr = new Schnorr(BP, G1, G2, GT, Zr, false, false);
 
-        Key key = rsa.keygen();
-        Signature signature = rsa.sign(key);
-        Boolean flag = rsa.verify(key, signature);
+        KeyPair key = schnorr.keygen();
+        CryptoMap signature = schnorr.sign("null", key.sk);
+        System.out.println(schnorr.verify("null", key.pk, signature));
 
-
-        key.print();
-        signature.print();
-        System.out.println(flag);
 
     }
 }

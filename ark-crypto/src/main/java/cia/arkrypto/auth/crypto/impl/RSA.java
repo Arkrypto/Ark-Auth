@@ -1,11 +1,10 @@
 package cia.arkrypto.auth.crypto.impl;
 
 import cia.arkrypto.auth.crypto.CipherSystem;
-import cia.arkrypto.auth.dto.Key;
-import cia.arkrypto.auth.dto.Signature;
-import it.unisa.dia.gas.jpbc.Element;
+import cia.arkrypto.auth.dto.CryptoMap;
+import cia.arkrypto.auth.dto.KeyPair;
+import cia.arkrypto.auth.utils.HashUtil;
 import it.unisa.dia.gas.jpbc.Field;
-import it.unisa.dia.gas.jpbc.Pairing;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -14,12 +13,12 @@ import java.security.SecureRandom;
 // JPBC 并不适用，用 BigInteger 手写的
 public class RSA extends CipherSystem {
 
-    public RSA(Boolean sanitizable, Boolean updatable) {
-        super(null, null, null, null, null, sanitizable, updatable);
+    public RSA(Field Zr, Boolean sanitizable, Boolean updatable) {
+        super(null, null, null, null, Zr, sanitizable, updatable);
     }
 
     @Override
-    public Key keygen(){
+    public KeyPair keygen(){
 
         BigInteger p = BigInteger.probablePrime(512, new SecureRandom());
         BigInteger q = BigInteger.probablePrime(512, new SecureRandom());
@@ -31,34 +30,43 @@ public class RSA extends CipherSystem {
         BigInteger d = e.modInverse(phi);
 
 
-        Key k = new Key();
-        k.add("d", d);
-        k.add("e", e);
-        k.add("n", n);
+        KeyPair k = new KeyPair();
+
+        k.sk.put("d", d);
+        k.sk.put("phi", phi);
+        k.sk.put("n", n);
+        k.pk.put("e", e);
+        k.pk.put("n", n);
 
         return k;
     }
 
 
+    // s = H(m)^d
     @Override
-    public Signature sign(Key key){
-        // 签名
-        BigInteger m = BigInteger.probablePrime(64, new SecureRandom());
-        BigInteger s = m.modPow((BigInteger) key.get("d"), (BigInteger) key.get("n"));
+    public CryptoMap sign(String message, CryptoMap sk){
+        // 明文哈希
+        BigInteger m = HashUtil.hashStr2Zr(getZr(), message).toBigInteger();
+        BigInteger d = sk.getBigInteger("d");
+        BigInteger n = sk.getBigInteger("n");
+        BigInteger s = m.modPow(d, n);
 
-        Signature signature = new Signature();
-        signature.add("m", m);
-        signature.add("s", s); // s = m^d % n
+        CryptoMap signature = new CryptoMap();
+        signature.put("s", s); // s = m^d % n
 
         return signature;
     }
 
 
+    // H(m) ?= s^e
     @Override
-    public Boolean verify(Key key, Signature signature){
-        BigInteger s = (BigInteger) signature.get("s");
-        BigInteger recovered = s.modPow((BigInteger) key.get("e"), (BigInteger) key.get("n"));
-        BigInteger m = (BigInteger) signature.get("m");
+    public Boolean verify(String message, CryptoMap pk, CryptoMap signature){
+        BigInteger s = signature.getBigInteger("s");
+        BigInteger e = pk.getBigInteger("e");
+        BigInteger n = pk.getBigInteger("n");
+
+        BigInteger recovered = s.modPow(e, n);
+        BigInteger m = HashUtil.hashStr2Zr(getZr(), message).toBigInteger();
         return m.equals(recovered);
     }
 

@@ -3,54 +3,56 @@ package cia.arkrypto.auth.service;
 
 import cia.arkrypto.auth.crypto.CipherSystem;
 import cia.arkrypto.auth.crypto.impl.RSA;
-import cia.arkrypto.auth.dto.Key;
 import cia.arkrypto.auth.crypto.impl.Schnorr;
-import cia.arkrypto.auth.dto.Signature;
-import it.unisa.dia.gas.jpbc.Field;
-import it.unisa.dia.gas.jpbc.Pairing;
-import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
+import cia.arkrypto.auth.dto.KeyPair;
+import cia.arkrypto.auth.crypto.impl.SchnorrRFID;
+import cia.arkrypto.auth.dto.CryptoMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class AuthService {
 
-    private final CipherSystem schnorr, rsa;
+    private final CipherSystem schnorrRFID, rsa, schnorr;
     @Autowired
-    public AuthService(Schnorr schnorr, RSA rsa){
-        this.schnorr = schnorr;
+    public AuthService(SchnorrRFID schnorrRFID, RSA rsa, Schnorr schnorr){
+        this.schnorrRFID = schnorrRFID;
         this.rsa = rsa;
+        this.schnorr = schnorr;
     }
 
 
 
-    public Key keygen(String algo){
-        if(algo.equalsIgnoreCase("schnorr")){
+    public KeyPair keygen(String algo){
+        if (algo.equalsIgnoreCase("schnorr")){
             return schnorr.keygen();
-        } else if(algo.equalsIgnoreCase("rsa")){
+        } else if (algo.equalsIgnoreCase("rsa")){
             return rsa.keygen();
+        } else if(algo.equalsIgnoreCase("schnorrRFID")){
+            return schnorrRFID.keygen();
         }
         return null;
     }
 
 
-    public Signature sign(String algo, Key key){
-        if(algo.equalsIgnoreCase("schnorr")){
-            return schnorr.sign(key);
+    public CryptoMap sign(String algo, String message, CryptoMap sk){
+        if (algo.equalsIgnoreCase("schnorr")){
+            return schnorr.sign(message, sk);
         } else if(algo.equalsIgnoreCase("rsa")){
-            return rsa.sign(key);
+            return rsa.sign(message, sk);
+        } else if(algo.equalsIgnoreCase("schnorrRFID")){
+            return schnorrRFID.sign(message, sk);
         }
         return null;
     }
 
-    public Boolean verify(String algo, Key key, Signature signature){
-        if (algo.equalsIgnoreCase("schnorr")) {
-            return schnorr.verify(key, signature);
+    public Boolean verify(String algo, String message, CryptoMap pk, CryptoMap signature){
+        if (algo.equalsIgnoreCase("schnorr")){
+            return schnorr.verify(message, pk, signature);
         } else if(algo.equalsIgnoreCase("rsa")){
-            return rsa.verify(key, signature);
+            return rsa.verify(message, pk, signature);
+        } else if(algo.equalsIgnoreCase("schnorrRFID")) {
+            return schnorrRFID.verify(message, pk, signature);
         }
         return null;
     }

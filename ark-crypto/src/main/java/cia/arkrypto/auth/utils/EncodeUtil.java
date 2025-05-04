@@ -1,37 +1,35 @@
 package cia.arkrypto.auth.utils;
 
+import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Field;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
 
+import java.math.BigInteger;
+import java.util.Base64;
 import java.util.Map;
 
 public class EncodeUtil {
 
-    private static Pairing bp = PairingFactory.getPairing("a.properties");
-    public static void main(String[] args) {
 
-        int num = 0;
-        Field Zr = bp.getZr();
-
-        for(int i = 0; i < 9; i++){
-
-            String randomStr = Integer.toBinaryString(num);
-            String randomStrWithPadding = String.format("%7s", randomStr).replaceAll(" ", "0");
-            Map<String, Object> encResult0 = enc0(randomStrWithPadding);
-            Map<String, Object> encResult1 = enc1(randomStrWithPadding);
-
-            System.out.println("Num: " + num);
-            System.out.println(encResult0);
-            System.out.println(HashUtil.hashStr2Zr(Zr, (String) encResult0.get("result"), 64));
-
-            System.out.println(encResult1);
-            System.out.println(HashUtil.hashStr2Zr(Zr, (String) encResult1.get("result"), 64) + "\n");
-
-            num += 10;
-        }
+    public static String parseBigInteger2HexStr(BigInteger bi){
+        return bi.toString(16);
     }
 
+    public static BigInteger parseHexStr2BigInteger(String str){
+        return new BigInteger(str, 16);
+    }
+
+
+    public static String parseElement2Base64Str(Element element){
+        byte[] bytes = element.toBytes(); // 转为 byte[]
+        return Base64.getEncoder().encodeToString(bytes);
+    }
+
+    public static Element parseBase64Str2Element(String base64, Field field){
+        byte[] bytes = Base64.getDecoder().decode(base64);
+        return field.newElementFromBytes(bytes).getImmutable();
+    }
 
     public static StringBuilder subComma(StringBuilder str){
         if (!str.isEmpty() && ',' == str.charAt(str.length() - 1)){

@@ -2,13 +2,12 @@ package cia.arkrypto.auth.crypto;
 
 import cia.arkrypto.auth.crypto.impl.RSA;
 import cia.arkrypto.auth.crypto.impl.Schnorr;
+import cia.arkrypto.auth.crypto.impl.SchnorrRFID;
 import it.unisa.dia.gas.jpbc.Field;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.InputStream;
 
 @Configuration
 public class CryptoConfig {
@@ -39,17 +38,24 @@ public class CryptoConfig {
     }
 
     @Bean
-    public Schnorr schnorr(Pairing pairing, Field G1, Field G2, Field GT, Field Zr) {
+    public SchnorrRFID schnorrRFID(Pairing pairing, Field G1, Field G2, Field GT, Field Zr) {
         int length = 10; // 可替换为配置参数
         boolean sanitizable = false; // 同上
         boolean updatable = false;
-        return new Schnorr(pairing, G1, G2, GT, Zr, sanitizable, updatable, length);
+        return new SchnorrRFID(pairing, G1, G2, GT, Zr, sanitizable, updatable, length);
     }
 
     @Bean
-    public RSA rsa() {
+    public RSA rsa(Field Zr) {
         boolean sanitizable = false;
         boolean updatable = false;
-        return new RSA(sanitizable, updatable);
+        return new RSA(Zr, sanitizable, updatable);
+    }
+
+    @Bean
+    public Schnorr schnorr(Pairing pairing, Field G1, Field G2, Field GT, Field Zr){
+        boolean sanitizable = false;
+        boolean updatable = false;
+        return new Schnorr(pairing, G1, G2, GT, Zr, sanitizable, updatable);
     }
 }

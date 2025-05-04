@@ -1,0 +1,51 @@
+package cia.arkrypto.auth.dto;
+
+import cia.arkrypto.auth.utils.EncodeUtil;
+import it.unisa.dia.gas.jpbc.Element;
+import it.unisa.dia.gas.jpbc.Field;
+import lombok.Data;
+
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
+
+@Data
+public class CryptoMap {
+    Map<String, String> cryptoMap;
+
+    public CryptoMap(){
+        cryptoMap = new HashMap<>();
+    }
+
+    public void put(String key, Element val){
+        cryptoMap.put(key, EncodeUtil.parseElement2Base64Str(val));
+    }
+
+
+    public void put(String key, BigInteger val){
+        cryptoMap.put(key, EncodeUtil.parseBigInteger2HexStr(val));
+    }
+
+    public Boolean put(String ... kv){
+        int n = kv.length;
+        if(n % 2 != 0){
+            return false;
+        }
+        for(int i = 0; i < n; i+=2){
+            cryptoMap.put(kv[i], kv[i+1]);
+        }
+        return true;
+    }
+
+    public Element getElement(String id, Field field){
+        return EncodeUtil.parseBase64Str2Element(cryptoMap.get(id), field);
+    }
+
+    public BigInteger getBigInteger(String key){
+        return EncodeUtil.parseHexStr2BigInteger(cryptoMap.get(key));
+    }
+
+    public void print(){
+        System.out.println(cryptoMap.toString());
+    }
+}

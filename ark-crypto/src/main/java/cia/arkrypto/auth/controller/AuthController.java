@@ -1,7 +1,7 @@
 package cia.arkrypto.auth.controller;
 
-import cia.arkrypto.auth.dto.Key;
-import cia.arkrypto.auth.dto.Signature;
+import cia.arkrypto.auth.dto.KeyPair;
+import cia.arkrypto.auth.dto.CryptoMap;
 import cia.arkrypto.auth.service.AuthService;
 import cia.arkrypto.auth.utils.ResultCode;
 import cia.arkrypto.auth.utils.ResultUtil;
@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.transform.Result;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -29,19 +27,20 @@ public class AuthController {
 
     @GetMapping("/test")
     public String test(@RequestParam("algo") String algo, Model model) {
-        Key key = authService.keygen(algo);
-        if(Objects.isNull(key)){
+        KeyPair keyPair = authService.keygen(algo);
+        if(Objects.isNull(keyPair)){
             model.addAttribute("result", Map.of("error", "algo invalid"));
             return "auth";
         }
 
-        Signature signature = authService.sign(algo, key);
-        Boolean flag = authService.verify(algo, key, signature);
+        CryptoMap signature = authService.sign(algo, "test", keyPair.sk);
+        Boolean flag = authService.verify(algo, "test", keyPair.pk, signature);
 
 
         model.addAttribute("algo", algo);
         model.addAttribute("result", Map.of(
-                "key", key,
+                "pk", keyPair.pk,
+                "sk", keyPair.sk,
                 "signature", signature,
                 "flag", flag
         ));
@@ -54,11 +53,11 @@ public class AuthController {
     @ResponseBody
     public ResultUtil keygen(@RequestParam Map<String, String> params){
         String algo = params.get("algo");
-        Key key = authService.keygen(algo);
-        if(key == null){
+        KeyPair keyPair = authService.keygen(algo);
+        if(keyPair == null){
             return ResultUtil.failure(ResultCode.PARAM_IS_INVALID);
         }
-        return ResultUtil.success(key);
+        return ResultUtil.success(keyPair);
     }
 
     // 签名
@@ -66,9 +65,10 @@ public class AuthController {
     @ResponseBody
     public ResultUtil sign(@RequestParam Map<String, Object> params){
         String algo = (String)params.get("algo");
-        Key key = (Key)params.get("key");
+        String message = (String)params.get("message");
+        CryptoMap sk = (CryptoMap) params.get("sk");
 
-        Signature signature = authService.sign(algo, key);
+        CryptoMap signature = authService.sign(algo, message, sk);
         if(signature == null){
             return ResultUtil.failure(ResultCode.INTERNAL_SERVER_ERROR);
         }
@@ -82,11 +82,12 @@ public class AuthController {
     @ResponseBody
     public ResultUtil verify(@RequestParam Map<String, Object> params){
         String algo = (String)params.get("algo");
-        Key key = (Key)params.get("key");
-        Signature signature = (Signature)params.get("signature");
+        String message = (String)params.get("message");
+        CryptoMap pk = (CryptoMap)params.get("pk");
+        CryptoMap signature = (CryptoMap)params.get("signature");
 
 
-        return ResultUtil.success(authService.verify(algo, key, signature));
+        return ResultUtil.success(authService.verify(algo, message, pk, signature));
     }
 
 
