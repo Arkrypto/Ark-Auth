@@ -1,13 +1,20 @@
 spring:
   application:
     name: Ark-Auth
+  security:
+    user:
+      name: "arkrypto"
+      password: "011026"
+  thymeleaf:
+    cache: false
+
   #  datasource:
   #    username: root
   #    password: ""
   #    url: jdbc:mysql://localhost:3306/auth_platform?useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
   #    driver-class-name: com.mysql.cj.jdbc.Driver
-  thymeleaf:
-    cache: false
+
+
 #  data:
 #    redis:
 #      host: localhost
