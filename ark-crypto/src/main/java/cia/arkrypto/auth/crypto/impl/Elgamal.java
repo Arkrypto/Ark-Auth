@@ -13,8 +13,8 @@ import java.security.SecureRandom;
 
 public class Elgamal extends CipherSystem {
 
-    public Elgamal(Field Zr, Boolean sanitizable, Boolean updatable) {
-        super(null, null, null, null, Zr, sanitizable, updatable);
+    public Elgamal(Field Zr) {
+        super(null, null, null, null, Zr, false, false);
     }
 
 

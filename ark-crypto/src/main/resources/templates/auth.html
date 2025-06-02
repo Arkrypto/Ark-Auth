@@ -59,17 +59,17 @@
 						<h3>协议</h3>
 						<form method="get" th:action="@{/test}">
 							<div class="col-12">
-								<select name="algo" id="demo-category" th:value="${algo}">
+								<select name="algo" th:value="${algo}">
 									<option value="" th:selected="${algo == null or algo == ''}">请选择</option>
 									<option value="RSA" th:selected="${algo == 'RSA'}">RSA Protocol</option>
 									<option value="ElGamal" th:selected="${algo == 'ElGamal'}">ElGamal Protocol on ECC</option>
 									<option value="DH" th:selected="${algo == 'DH'}">DH Protocol on ECC</option>
 									<option value="Schnorr" th:selected="${algo == 'Schnorr'}">Schnorr Protocol</option>
-									<option value="SchnorrRFID" th:selected="${algo == 'SchnorrRFID'}">RFID Schnorr Protocol</option>
-									<option value="OkamotoRFID" th:selected="${algo == 'OkamotoRFID'}">RFID Okamoto Protocol</option>
-									<option value="EC-RAC" th:selected="${algo == 'EC-RAC'}">RFID EC-RAC Protocol</option>
-									<option value="ECDLP-RK" th:selected="${algo == 'ECDLP-RK'}">RFID ECDLP-RK Protocol</option>
-									<option value="ECC-ID-Verifier" th:selected="${algo == 'ECC-ID'}">RFID ECC-ID-Verifier Protocol</option>
+									<option value="Schnorr_RFID" th:selected="${algo == 'Schnorr_RFID'}">RFID Schnorr Protocol</option>
+									<option value="Okamoto_RFID" th:selected="${algo == 'Okamoto_RFID'}">RFID Okamoto Protocol</option>
+									<option value="EC_RAC" th:selected="${algo == 'EC_RAC'}">RFID EC-RAC Protocol</option>
+									<option value="ECDLP_RK" th:selected="${algo == 'ECDLP_RK'}">RFID ECDLP-RK Protocol</option>
+									<option value="ECC_ID" th:selected="${algo == 'ECC_ID'}">RFID ECC-ID-Verifier Protocol</option>
 								</select>
 							</div><br>
 							<div class="col-12">
@@ -82,7 +82,7 @@
 
 						<h3>测试结果</h3>
 
-						<div th:each="entry : ${result}">
+						<div th:each="entry: ${result}">
 							<strong th:text="${entry.key}">Key</strong>:<br>
 							<p th:text="${entry.value}" style="word-wrap: break-word; word-break: break-all; white-space: normal;">Value</p>
 						</div><br>

@@ -13,8 +13,8 @@ import java.security.SecureRandom;
 // JPBC 并不适用，用 BigInteger 手写的
 public class RSA extends CipherSystem {
 
-    public RSA(Field Zr, Boolean sanitizable, Boolean updatable) {
-        super(null, null, null, null, Zr, sanitizable, updatable);
+    public RSA(Field Zr) {
+        super(null, null, null, null, Zr, false, false);
     }
 
     @Override

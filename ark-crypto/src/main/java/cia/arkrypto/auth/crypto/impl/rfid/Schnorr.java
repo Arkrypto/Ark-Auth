@@ -1,4 +1,4 @@
-package cia.arkrypto.auth.crypto.impl;
+package cia.arkrypto.auth.crypto.impl.rfid;
 
 import cia.arkrypto.auth.crypto.CipherSystem;
 import cia.arkrypto.auth.dto.KeyPair;
@@ -18,12 +18,12 @@ import java.util.List;
 // 密钥分发
 // 签名
 // 验证
-public class SchnorrRFID extends CipherSystem {
+public class Schnorr extends CipherSystem {
 
     private static List<PK> list = null;
 
-    public SchnorrRFID(Pairing BP, Field G1, Field G2, Field GT, Field Zr, Boolean sanitizable, Boolean updatable, int length) {
-        super(BP, G1, G2, GT, Zr, sanitizable, updatable);
+    public Schnorr(Field G1, Field Zr, int length) {
+        super(null, G1, null, null, Zr, false, false);
         list = new FixedSizeQueue<>(length);
     }
 

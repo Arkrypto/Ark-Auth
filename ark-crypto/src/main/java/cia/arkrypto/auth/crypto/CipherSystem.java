@@ -50,6 +50,4 @@ public abstract class CipherSystem implements Auth {
         return GT.newRandomElement().getImmutable();
     }
 
-
-
 }

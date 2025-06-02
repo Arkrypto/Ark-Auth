@@ -11,8 +11,8 @@ import it.unisa.dia.gas.jpbc.Pairing;
 public class Schnorr extends CipherSystem {
 
 
-    public Schnorr(Pairing BP, Field G1, Field Zr, Boolean sanitizable, Boolean updatable) {
-        super(BP, G1, null, null, Zr, sanitizable, updatable);
+    public Schnorr(Field G1, Field Zr) {
+        super(null, G1, null, null, Zr, false, false);
     }
 
 

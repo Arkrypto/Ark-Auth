@@ -2,8 +2,7 @@ package cia.arkrypto.auth.config;
 
 import cia.arkrypto.auth.crypto.impl.Elgamal;
 import cia.arkrypto.auth.crypto.impl.RSA;
-import cia.arkrypto.auth.crypto.impl.Schnorr;
-import cia.arkrypto.auth.crypto.impl.SchnorrRFID;
+import cia.arkrypto.auth.crypto.impl.rfid.Schnorr;
 import it.unisa.dia.gas.jpbc.Field;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
@@ -40,30 +39,22 @@ public class CryptoConfig {
 
     @Bean
     public RSA rsa(Field Zr) {
-        boolean sanitizable = false;
-        boolean updatable = false;
-        return new RSA(Zr, sanitizable, updatable);
+        return new RSA(Zr);
     }
 
     @Bean
-    public Schnorr schnorr(Pairing pairing, Field G1, Field Zr){
-        boolean sanitizable = false;
-        boolean updatable = false;
-        return new Schnorr(pairing, G1, Zr, sanitizable, updatable);
+    public cia.arkrypto.auth.crypto.impl.Schnorr schnorr(Field G1, Field Zr){
+        return new cia.arkrypto.auth.crypto.impl.Schnorr(G1, Zr);
     }
 
     @Bean
     public Elgamal elgamal(Field Zr) {
-        boolean sanitizable = false;
-        boolean updatable = false;
-        return new Elgamal(Zr, sanitizable, updatable);
+        return new Elgamal(Zr);
     }
 
     @Bean
-    public SchnorrRFID schnorrRFID(Pairing pairing, Field G1, Field G2, Field GT, Field Zr) {
-        int length = 10; // 可替换为配置参数
-        boolean sanitizable = false; // 同上
-        boolean updatable = false;
-        return new SchnorrRFID(pairing, G1, G2, GT, Zr, sanitizable, updatable, length);
+    public Schnorr schnorr_rfid(Field G1, Field Zr) {
+        int length = 10; // 可替换配置参数
+        return new Schnorr(G1, Zr, length);
     }
 }

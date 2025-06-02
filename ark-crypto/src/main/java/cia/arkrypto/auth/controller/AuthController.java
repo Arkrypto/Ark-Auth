@@ -24,7 +24,6 @@ public class AuthController {
         this.authService = authService;
     }
 
-
     @GetMapping("/test")
     public String test(@RequestParam("algo") String algo, Model model) {
         KeyPair keyPair = authService.keygen(algo);
@@ -35,7 +34,6 @@ public class AuthController {
 
         CryptoMap signature = authService.sign(algo, "test", keyPair.sk);
         Boolean flag = authService.verify(algo, "test", keyPair.pk, signature);
-
 
         model.addAttribute("algo", algo);
         model.addAttribute("result", Map.of(

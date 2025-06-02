@@ -4,9 +4,8 @@ package cia.arkrypto.auth.service;
 import cia.arkrypto.auth.crypto.CipherSystem;
 import cia.arkrypto.auth.crypto.impl.Elgamal;
 import cia.arkrypto.auth.crypto.impl.RSA;
-import cia.arkrypto.auth.crypto.impl.Schnorr;
 import cia.arkrypto.auth.dto.KeyPair;
-import cia.arkrypto.auth.crypto.impl.SchnorrRFID;
+import cia.arkrypto.auth.crypto.impl.rfid.Schnorr;
 import cia.arkrypto.auth.dto.CryptoMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,54 +13,52 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
 
-    private final CipherSystem schnorrRFID, rsa, schnorr, elgamal;
+    private final CipherSystem schnorr_rfid, rsa, schnorr, elgamal;
     @Autowired
-    public AuthService(SchnorrRFID schnorrRFID, RSA rsa, Schnorr schnorr, Elgamal elgamal){
-        this.schnorrRFID = schnorrRFID;
+    public AuthService(Schnorr schnorr_rfid, RSA rsa, cia.arkrypto.auth.crypto.impl.Schnorr schnorr, Elgamal elgamal){
+        this.schnorr_rfid = schnorr_rfid;
         this.rsa = rsa;
         this.schnorr = schnorr;
         this.elgamal = elgamal;
     }
 
 
-
-    public KeyPair keygen(String algo){
+    public CipherSystem selectSystem(String algo){
         if (algo.equalsIgnoreCase("schnorr")){
-            return schnorr.keygen();
+            return schnorr;
         } else if (algo.equalsIgnoreCase("rsa")){
-            return rsa.keygen();
+            return rsa;
         } else if (algo.equalsIgnoreCase("elgamal")){
-            return elgamal.keygen();
-        } else if (algo.equalsIgnoreCase("schnorrRFID")){
-            return schnorrRFID.keygen();
+            return elgamal;
+        } else if (algo.equalsIgnoreCase("schnorr_rfid")){
+            return schnorr_rfid;
         }
         return null;
+    }
+
+
+    public KeyPair keygen(String algo){
+        CipherSystem cipherSystem = selectSystem(algo);
+        if(cipherSystem == null){
+            return null;
+        }
+        return cipherSystem.keygen();
     }
 
 
     public CryptoMap sign(String algo, String message, CryptoMap sk){
-        if (algo.equalsIgnoreCase("schnorr")){
-            return schnorr.sign(message, sk);
-        } else if(algo.equalsIgnoreCase("rsa")){
-            return rsa.sign(message, sk);
-        } else if (algo.equalsIgnoreCase("elgamal")){
-            return elgamal.sign(message, sk);
-        } else if(algo.equalsIgnoreCase("schnorrRFID")){
-            return schnorrRFID.sign(message, sk);
+        CipherSystem cipherSystem = selectSystem(algo);
+        if(cipherSystem == null){
+            return null;
         }
-        return null;
+        return cipherSystem.sign(message, sk);
     }
 
     public Boolean verify(String algo, String message, CryptoMap pk, CryptoMap signature){
-        if (algo.equalsIgnoreCase("schnorr")){
-            return schnorr.verify(message, pk, signature);
-        } else if(algo.equalsIgnoreCase("rsa")){
-            return rsa.verify(message, pk, signature);
-        } else if (algo.equalsIgnoreCase("elgamal")){
-            return elgamal.verify(message, pk, signature);
-        } else if(algo.equalsIgnoreCase("schnorrRFID")) {
-            return schnorrRFID.verify(message, pk, signature);
+        CipherSystem cipherSystem = selectSystem(algo);
+        if(cipherSystem == null){
+            return null;
         }
-        return null;
+        return cipherSystem.verify(message, pk, signature);
     }
 }

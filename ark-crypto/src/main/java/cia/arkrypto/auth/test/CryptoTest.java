@@ -3,8 +3,7 @@ package cia.arkrypto.auth.test;
 import cia.arkrypto.auth.crypto.CipherSystem;
 import cia.arkrypto.auth.crypto.impl.Elgamal;
 import cia.arkrypto.auth.crypto.impl.RSA;
-import cia.arkrypto.auth.crypto.impl.Schnorr;
-import cia.arkrypto.auth.crypto.impl.SchnorrRFID;
+import cia.arkrypto.auth.crypto.impl.rfid.Schnorr;
 import cia.arkrypto.auth.dto.CryptoMap;
 import cia.arkrypto.auth.dto.KeyPair;
 import it.unisa.dia.gas.jpbc.Field;
@@ -22,10 +21,10 @@ public class CryptoTest {
 
     public static void main(String[] args) {
 
-        CipherSystem schnorrRFID = new SchnorrRFID(BP, G1, G2, GT, Zr, false, false, 10);
-        CipherSystem rsa = new RSA(Zr, false, false);
-        CipherSystem schnorr = new Schnorr(BP, G1, Zr, false, false);
-        CipherSystem elgamal = new Elgamal(Zr, false, false);
+        CipherSystem schnorrRFID = new Schnorr(G1, Zr, 10);
+        CipherSystem rsa = new RSA(Zr);
+        CipherSystem schnorr = new cia.arkrypto.auth.crypto.impl.Schnorr(G1, Zr);
+        CipherSystem elgamal = new Elgamal(Zr);
 
         KeyPair key = elgamal.keygen();
         CryptoMap signature = elgamal.sign("null", key.sk);
