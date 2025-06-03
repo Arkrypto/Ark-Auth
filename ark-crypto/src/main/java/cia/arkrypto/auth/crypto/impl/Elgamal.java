@@ -4,9 +4,7 @@ import cia.arkrypto.auth.crypto.CipherSystem;
 import cia.arkrypto.auth.dto.CryptoMap;
 import cia.arkrypto.auth.dto.KeyPair;
 import cia.arkrypto.auth.utils.HashUtil;
-import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Field;
-import it.unisa.dia.gas.jpbc.Pairing;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -42,9 +40,9 @@ public class Elgamal extends CipherSystem {
 
     @Override
     public CryptoMap sign(String message, CryptoMap sk){
-        BigInteger g = sk.getBigInteger("g");
-        BigInteger p = sk.getBigInteger("p");
-        BigInteger x = sk.getBigInteger("x");
+        BigInteger g = sk.get("g");
+        BigInteger p = sk.get("p");
+        BigInteger x = sk.get("x");
 
         BigInteger HM = HashUtil.hashStr2Group(getZr(), message).toBigInteger();
         // k 必须是可逆的
@@ -63,11 +61,11 @@ public class Elgamal extends CipherSystem {
 
     @Override
     public Boolean verify(String message, CryptoMap pk, CryptoMap signature){
-        BigInteger g = pk.getBigInteger("g");
-        BigInteger y = pk.getBigInteger("y");
-        BigInteger p = pk.getBigInteger("p");
-        BigInteger r = signature.getBigInteger("r");
-        BigInteger s = signature.getBigInteger("s");
+        BigInteger g = pk.get("g");
+        BigInteger y = pk.get("y");
+        BigInteger p = pk.get("p");
+        BigInteger r = signature.get("r");
+        BigInteger s = signature.get("s");
 
         BigInteger HM = HashUtil.hashStr2Group(getZr(), message).toBigInteger();
         BigInteger left = y.modPow(r, p).multiply(r.modPow(s, p)).mod(p);

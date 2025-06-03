@@ -6,7 +6,6 @@ import cia.arkrypto.auth.dto.CryptoMap;
 import cia.arkrypto.auth.utils.FixedSizeQueue;
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Field;
-import it.unisa.dia.gas.jpbc.Pairing;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -60,8 +59,8 @@ public class Schnorr extends CipherSystem {
     @Override
     public CryptoMap sign(String message, CryptoMap sk){
         Element e = randomZ();
-        Element x = sk.getElement("x", getZr());
-        Element sigma = x.mul(e).add(sk.getElement("r", getZr())).getImmutable();
+        Element x = sk.get("x", getZr());
+        Element sigma = x.mul(e).add(sk.get("r", getZr())).getImmutable();
 
         CryptoMap signature = new CryptoMap();
         signature.put("e", e);
@@ -75,9 +74,9 @@ public class Schnorr extends CipherSystem {
 
     @Override
     public Boolean verify(String message, CryptoMap pk, CryptoMap signature){
-        Element sigma = signature.getElement("sigma", getZr());
-        Element e = signature.getElement("e", getZr());
-        Element X = pk.getElement("X", getG1());
+        Element sigma = signature.get("sigma", getZr());
+        Element e = signature.get("e", getZr());
+        Element X = pk.get("X", getG1());
         // 查表检查密钥
         for(PK key: list){
             if(key.getP().mulZn(sigma).add(key.getZ().mulZn(e)).isEqual(X)){

@@ -6,7 +6,6 @@ import cia.arkrypto.auth.dto.KeyPair;
 import cia.arkrypto.auth.utils.HashUtil;
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Field;
-import it.unisa.dia.gas.jpbc.Pairing;
 
 public class Schnorr extends CipherSystem {
 
@@ -37,8 +36,8 @@ public class Schnorr extends CipherSystem {
     // R = rG, c = H(msg, R), z = r+cx
     @Override
     public CryptoMap sign(String message, CryptoMap sk){
-        Element g = sk.getElement("g", getG1());
-        Element x = sk.getElement("x", getZr());
+        Element g = sk.get("g", getG1());
+        Element x = sk.get("x", getZr());
 
         Element r = randomZ();
         Element R = g.mulZn(r).getImmutable();
@@ -57,10 +56,10 @@ public class Schnorr extends CipherSystem {
     // H(msg, R1) = H(msg, R) = c
     @Override
     public Boolean verify(String message, CryptoMap pk, CryptoMap signature){
-        Element y = pk.getElement("y", getG1());
-        Element g = pk.getElement("g", getG1());
-        Element z = signature.getElement("z", getZr());
-        Element c = signature.getElement("c", getZr());
+        Element y = pk.get("y", getG1());
+        Element g = pk.get("g", getG1());
+        Element z = signature.get("z", getZr());
+        Element c = signature.get("c", getZr());
 
         Element R1 = g.mulZn(z).sub(y.mulZn(c)).getImmutable();
 

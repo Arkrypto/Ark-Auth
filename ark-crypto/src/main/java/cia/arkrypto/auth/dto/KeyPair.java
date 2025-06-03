@@ -16,8 +16,7 @@ public class KeyPair {
         pk = new CryptoMap();
     }
 
-    public void print(){
-        sk.print();
-        pk.print();
+    public String toString(){
+        return pk.toString() + "\n" + sk.toString();
     }
 }

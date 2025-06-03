@@ -11,6 +11,7 @@ import java.util.Map;
 
 @Data
 public class CryptoMap {
+
     Map<String, String> cryptoMap;
 
     public CryptoMap(){
@@ -37,15 +38,15 @@ public class CryptoMap {
         return true;
     }
 
-    public Element getElement(String id, Field field){
+    public Element get(String id, Field field){
         return EncodeUtil.parseBase64Str2Element(cryptoMap.get(id), field);
     }
 
-    public BigInteger getBigInteger(String key){
+    public BigInteger get(String key){
         return EncodeUtil.parseHexStr2BigInteger(cryptoMap.get(key));
     }
 
-    public void print(){
-        System.out.println(cryptoMap.toString());
+    public String toString(){
+        return cryptoMap.toString();
     }
 }
