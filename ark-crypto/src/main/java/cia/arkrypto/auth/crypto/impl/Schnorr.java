@@ -36,8 +36,8 @@ public class Schnorr extends CipherSystem {
     // R = rG, c = H(msg, R), z = r+cx
     @Override
     public CryptoMap sign(String message, CryptoMap sk){
-        Element g = sk.get("g", getG1());
-        Element x = sk.get("x", getZr());
+        Element g = sk.getE("g", getG1());
+        Element x = sk.getE("x", getZr());
 
         Element r = randomZ();
         Element R = g.mulZn(r).getImmutable();
@@ -48,6 +48,7 @@ public class Schnorr extends CipherSystem {
         CryptoMap signature = new CryptoMap();
         signature.put("z", z);
         signature.put("c", c);
+        signature.put("m", message);
 
         return signature;
     }
@@ -55,15 +56,16 @@ public class Schnorr extends CipherSystem {
     // R1 = zG-xGc = (r+cx)G-cxG = rG = R
     // H(msg, R1) = H(msg, R) = c
     @Override
-    public Boolean verify(String message, CryptoMap pk, CryptoMap signature){
-        Element y = pk.get("y", getG1());
-        Element g = pk.get("g", getG1());
-        Element z = signature.get("z", getZr());
-        Element c = signature.get("c", getZr());
+    public Boolean verify(CryptoMap pk, CryptoMap signature){
+        Element y = pk.getE("y", getG1());
+        Element g = pk.getE("g", getG1());
+        Element z = signature.getE("z", getZr());
+        Element c = signature.getE("c", getZr());
+        String m = signature.get("m");
 
         Element R1 = g.mulZn(z).sub(y.mulZn(c)).getImmutable();
 
 
-        return c.isEqual(HashUtil.hashStr2Group(getZr(), message, R1.toString()));
+        return c.isEqual(HashUtil.hashStr2Group(getZr(), m, R1.toString()));
     }
 }

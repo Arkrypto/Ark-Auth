@@ -4,6 +4,7 @@ import cia.arkrypto.auth.dto.CryptoMap;
 import cia.arkrypto.auth.dto.KeyPair;
 
 public interface Auth {
+
     default KeyPair keygen(){
         throw new UnsupportedOperationException("Key Generation Is Not Supported");
     }
@@ -16,7 +17,7 @@ public interface Auth {
         throw new UnsupportedOperationException("Sanitize Is Not Supported");
     }
 
-    default Boolean verify(String message, CryptoMap pk, CryptoMap signature){
+    default Boolean verify(CryptoMap pk, CryptoMap signature){
         throw new UnsupportedOperationException("Verify Is Not Supported");
     }
 }

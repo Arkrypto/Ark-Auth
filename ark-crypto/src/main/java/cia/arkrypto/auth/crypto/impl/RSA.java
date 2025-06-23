@@ -47,11 +47,12 @@ public class RSA extends CipherSystem {
     public CryptoMap sign(String message, CryptoMap sk){
         // 明文哈希
         BigInteger m = HashUtil.hashStr2Group(getZr(), message).toBigInteger();
-        BigInteger d = sk.get("d");
-        BigInteger n = sk.get("n");
+        BigInteger d = sk.getI("d");
+        BigInteger n = sk.getI("n");
         BigInteger s = m.modPow(d, n);
 
         CryptoMap signature = new CryptoMap();
+        signature.put("m", m);
         signature.put("s", s); // s = m^d % n
 
         return signature;
@@ -60,13 +61,13 @@ public class RSA extends CipherSystem {
 
     // H(m) ?= s^e
     @Override
-    public Boolean verify(String message, CryptoMap pk, CryptoMap signature){
-        BigInteger s = signature.get("s");
-        BigInteger e = pk.get("e");
-        BigInteger n = pk.get("n");
+    public Boolean verify(CryptoMap pk, CryptoMap signature){
+        BigInteger s = signature.getI("s");
+        BigInteger e = pk.getI("e");
+        BigInteger n = pk.getI("n");
+        BigInteger m = signature.getI("m");
 
         BigInteger recovered = s.modPow(e, n);
-        BigInteger m = HashUtil.hashStr2Group(getZr(), message).toBigInteger();
         return m.equals(recovered);
     }
 

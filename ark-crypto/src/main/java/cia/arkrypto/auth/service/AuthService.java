@@ -54,11 +54,11 @@ public class AuthService {
         return cipherSystem.sign(message, sk);
     }
 
-    public Boolean verify(String algo, String message, CryptoMap pk, CryptoMap signature){
+    public Boolean verify(String algo, CryptoMap pk, CryptoMap signature){
         CipherSystem cipherSystem = selectSystem(algo);
         if(cipherSystem == null){
             return null;
         }
-        return cipherSystem.verify(message, pk, signature);
+        return cipherSystem.verify(pk, signature);
     }
 }

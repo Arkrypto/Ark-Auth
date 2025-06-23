@@ -27,22 +27,25 @@ public class CryptoMap {
         cryptoMap.put(key, EncodeUtil.parseBigInteger2HexStr(val));
     }
 
-    public Boolean put(String ... kv){
+    public void put(String ... kv){
         int n = kv.length;
         if(n % 2 != 0){
-            return false;
+            return;
         }
         for(int i = 0; i < n; i+=2){
             cryptoMap.put(kv[i], kv[i+1]);
         }
-        return true;
     }
 
-    public Element get(String id, Field field){
+    public String get(String key){
+        return cryptoMap.get(key);
+    }
+
+    public Element getE(String id, Field field){
         return EncodeUtil.parseBase64Str2Element(cryptoMap.get(id), field);
     }
 
-    public BigInteger get(String key){
+    public BigInteger getI(String key){
         return EncodeUtil.parseHexStr2BigInteger(cryptoMap.get(key));
     }
 

@@ -50,4 +50,7 @@ public abstract class CipherSystem implements Auth {
         return GT.newRandomElement().getImmutable();
     }
 
+    public Element pairing(Element a, Element b){
+        return BP.pairing(a, b).getImmutable();
+    }
 }

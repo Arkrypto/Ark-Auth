@@ -5,11 +5,9 @@ import it.unisa.dia.gas.jpbc.Field;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.math.BigInteger;
 
 
 public class HashUtil {
-
 
     public static byte[] concat(byte[] ... arr) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -24,10 +22,9 @@ public class HashUtil {
     }
 
 
-    public static Element hashByte2Zr(Field Zr, byte[] bytes){
-        return Zr.newElementFromHash(bytes, 0, bytes.length).getImmutable();
+    public static Element hashByte2Group(Field group, byte[] bytes){
+        return group.newElementFromHash(bytes, 0, bytes.length).getImmutable();
     }
-
 
 
     public static Element hashStr2Group(Field group, String ... strings){
@@ -37,7 +34,7 @@ public class HashUtil {
             bytes[i] = strings[i].getBytes();
         }
         byte[] input = concat(bytes);
-        return hashByte2Zr(group, input);
+        return hashByte2Group(group, input);
     }
 
 }

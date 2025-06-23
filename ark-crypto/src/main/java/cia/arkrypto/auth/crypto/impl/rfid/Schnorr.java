@@ -59,8 +59,8 @@ public class Schnorr extends CipherSystem {
     @Override
     public CryptoMap sign(String message, CryptoMap sk){
         Element e = randomZ();
-        Element x = sk.get("x", getZr());
-        Element sigma = x.mul(e).add(sk.get("r", getZr())).getImmutable();
+        Element x = sk.getE("x", getZr());
+        Element sigma = x.mul(e).add(sk.getE("r", getZr())).getImmutable();
 
         CryptoMap signature = new CryptoMap();
         signature.put("e", e);
@@ -73,10 +73,10 @@ public class Schnorr extends CipherSystem {
 
 
     @Override
-    public Boolean verify(String message, CryptoMap pk, CryptoMap signature){
-        Element sigma = signature.get("sigma", getZr());
-        Element e = signature.get("e", getZr());
-        Element X = pk.get("X", getG1());
+    public Boolean verify(CryptoMap pk, CryptoMap signature){
+        Element sigma = signature.getE("sigma", getZr());
+        Element e = signature.getE("e", getZr());
+        Element X = pk.getE("X", getG1());
         // 查表检查密钥
         for(PK key: list){
             if(key.getP().mulZn(sigma).add(key.getZ().mulZn(e)).isEqual(X)){

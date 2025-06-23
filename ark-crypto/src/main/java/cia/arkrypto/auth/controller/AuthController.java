@@ -33,7 +33,7 @@ public class AuthController {
         }
 
         CryptoMap signature = authService.sign(algo, "test", keyPair.sk);
-        Boolean flag = authService.verify(algo, "test", keyPair.pk, signature);
+        Boolean flag = authService.verify(algo, keyPair.pk, signature);
 
         model.addAttribute("algo", algo);
         model.addAttribute("result", Map.of(
@@ -80,12 +80,11 @@ public class AuthController {
     @ResponseBody
     public ResultUtil verify(@RequestParam Map<String, Object> params){
         String algo = (String)params.get("algo");
-        String message = (String)params.get("message");
         CryptoMap pk = (CryptoMap)params.get("pk");
         CryptoMap signature = (CryptoMap)params.get("signature");
 
 
-        return ResultUtil.success(authService.verify(algo, message, pk, signature));
+        return ResultUtil.success(authService.verify(algo, pk, signature));
     }
 
 
